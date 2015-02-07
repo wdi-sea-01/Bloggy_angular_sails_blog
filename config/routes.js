@@ -32,15 +32,8 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  },
-
-  '/about':{
-    view:'about'
-  },
-
-  '/my-posts':"PostController.mine"
+  '/': "PagesController.index",
+  "get /[^.?]+?":"PagesController.index"
 
   /***************************************************************************
   *                                                                          *
