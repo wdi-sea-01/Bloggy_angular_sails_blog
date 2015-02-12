@@ -24,6 +24,6 @@ module.exports = {
     },
     models:{
         connection: 'myMongoDbServer',
-        migrate: 'alter'        
+        migrate: 'alter'
     }
 };
