@@ -30,7 +30,8 @@ module.exports.policies = {
   'PostController':{
     '*':['sessionAuth'],
     'find':true,
-    'findOne':true
+    'findOne':true,
+    'getComments':true
   },
   'CommentController':{
     '*':['sessionAuth'],

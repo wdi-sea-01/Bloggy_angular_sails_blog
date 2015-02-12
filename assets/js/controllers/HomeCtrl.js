@@ -22,8 +22,37 @@ myBlogApp.controller('HomeCtrl',['$scope','$http','$modal','AlertService','$loca
     }
 
     //$http.get('url')
-    $http(req).success(function(data){
-        $scope.posts = data;
+    // $http(req).success(function(data){
+    //     $scope.posts = data;
+    // });
+    io.socket.request(req.url,req.params,function(data,jwrs){
+        $scope.$apply(function(){
+            $scope.posts=data;    
+        });
+        console.log('jwrs',jwrs);
+    });
+
+    io.socket.on('post',function(event){
+        switch(event.verb){
+            case 'updated':
+                $scope.posts.forEach(function(item,idx){
+                    if(item.id==event.id){
+                        $scope.$apply(function(){
+                            event.data.id=event.id;
+                            event.data.owner=item.owner;
+                            $scope.posts[idx]=event.data;
+                        });
+                    }
+                });
+                break;
+            case 'created':
+                $scope.$apply(function(){
+                    $scope.posts.unshift(event.data);
+                });
+                break;
+            default:
+                console.log('event',event);
+        }
     });
 
     $scope.deletePost = function(idx){

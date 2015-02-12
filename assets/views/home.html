@@ -5,7 +5,7 @@
         <a ng-show="currentUser" href="/post/new" class="btn btn-success pull-right">+</a>
         <div ng-repeat="post in posts">
             <h3>{{post.title}}</h3>
-            <i>{{post.createdAt}}</i>
+            <p><i>Authored by {{post.owner.firstName || 'Unknown'}} on {{post.createdAt | date:'short'}}</i></p>
             <p>{{post.body | wordLimit:40}}</p>
             <a href="/post/{{post.id}}">Read more</a>
             <button ng-show="currentUser" ng-click="deletePost($index)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button>

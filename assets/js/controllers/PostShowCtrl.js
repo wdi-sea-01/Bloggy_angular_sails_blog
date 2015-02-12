@@ -1,11 +1,19 @@
 myBlogApp.controller('PostShowCtrl',['$scope','$http','$routeParams','$location','$modal',function($scope,$http,$routeParams,$location,$modal){
     var postId = $routeParams.id;
-    $http.get('/api/post/'+postId).success(function(data){
+    $scope.comments=[];
+    
+    $http.get('/api/post/'+postId)
+    .success(function(data){
         $scope.post=data;
     }).error(function(err){
         $location.path('/');
         alert('that post could not be found.');
-    })
+    });
+
+    $http.get('/api/post/'+postId+'/comments')
+    .success(function(data){
+        $scope.comments=data;
+    });
 
 
     $scope.editPost = function(){
@@ -31,7 +39,7 @@ myBlogApp.controller('PostShowCtrl',['$scope','$http','$routeParams','$location'
         $http.post('/api/post/'+postId+'/comments',commentData)
         .success(function(data){
             $scope.commentText="";
-            $scope.post=data;
+            $scope.comments.unshift(data);
         }).error(function(err){
             alert(err);
         });

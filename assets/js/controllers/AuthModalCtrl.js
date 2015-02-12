@@ -1,7 +1,10 @@
 myBlogApp.controller('AuthModalCtrl',['$scope','$http','$modalInstance','UserService','AlertService',function($scope,$http,$modalInstance,UserService,AlertService){
 
+    $scope.loginData={email:'',password:''};
+    $scope.signupData={};
+
     $scope.login = function(){
-        UserService.login($scope.email,$scope.password,
+        UserService.login($scope.loginData.email,$scope.loginData.password,
             function(err,data){
                 if(err){
                     //server error
