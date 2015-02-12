@@ -1,6 +1,26 @@
 <div class="row">
     <div class="col-sm-8">
-        <h1>{{post.title}}</h1>
+        <h1>
+            {{post.title}}
+            <button ng-click="editPost()" class="pull-right btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i></button>
+        </h1>
         <p>{{post.body}}</p>
+
+        <hr>
+        <h3>Comments</h3>
+
+        <form class="form" ng-submit="addComment()">
+            <div class="form-group">
+                <textarea ng-model="commentText" class="form-control" required></textarea>
+            </div>
+            <button class="btn btn-primary">Add Comment</button>
+        </form>
+
+        <hr>
+
+        <div class="well" ng-repeat="comment in post.comments | orderBy:'createdAt':true">
+            <p>{{comment.body}}</p>
+            <p><i>{{comment.createdAt | date:'short'}}</i></p>
+        </div>
     </div>
 </div>

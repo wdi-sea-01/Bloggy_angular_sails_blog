@@ -5,7 +5,7 @@ myBlogApp.controller('PostNewCtrl',['$scope','$http','$location',function($scope
             title:$scope.title,
             body:$scope.body
         };
-        $http.post('/.api/post',data).success(function(data){
+        $http.post('/api/post',data).success(function(data){
             $scope.alert="Your post has been created.";
             $scope.title="";
             $scope.body="";

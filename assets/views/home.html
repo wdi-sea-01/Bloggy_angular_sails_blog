@@ -1,14 +1,15 @@
 <h1>My Blog</h1>
-
+<alerts></alerts>
 <div class="row">
     <div class="col-sm-8">
-        <a href="/post/new" class="btn btn-success pull-right">+</a>
+        <a ng-show="currentUser" href="/post/new" class="btn btn-success pull-right">+</a>
         <div ng-repeat="post in posts">
             <h3>{{post.title}}</h3>
             <i>{{post.createdAt}}</i>
-            <p>{{post.body | limitTo: 200}}</p>
+            <p>{{post.body | wordLimit:40}}</p>
             <a href="/post/{{post.id}}">Read more</a>
-            <button ng-click="deletePost($index)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button>
+            <button ng-show="currentUser" ng-click="deletePost($index)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button>
+            <button ng-show="currentUser" ng-click="editPost($index)" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-pencil"></i></button>
         </div>
     </div>
 </div>

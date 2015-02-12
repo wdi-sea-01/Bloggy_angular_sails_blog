@@ -19,6 +19,27 @@
 
 module.exports.policies = {
 
+
+  '*':['forbidden'],
+  'PagesController':true,
+  'AuthController':true,
+  'UserController':{
+    '*':['sessionAuth'],
+    'create':true
+  },
+  'PostController':{
+    '*':['sessionAuth'],
+    'find':true,
+    'findOne':true
+  },
+  'CommentController':{
+    '*':['sessionAuth'],
+    'find':true,
+    'findOne':true
+  }
+
+
+
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *

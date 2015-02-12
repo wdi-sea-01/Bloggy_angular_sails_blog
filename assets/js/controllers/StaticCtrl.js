@@ -1,0 +1,3 @@
+myBlogApp.controller('StaticCtrl',[function(){
+
+}]);
