@@ -26,6 +26,19 @@ module.exports = {
         required:true
     },
 
+    /// associations
+
+    comments:{
+      collection:'Comment',
+      via:'owner'
+    },
+    posts:{
+      collection:'Post',
+      via:'owner'
+    },
+
+
+    /// instance methods
     toJSON: function(){
         var userObj = this.toObject();
         delete userObj.password;

@@ -24,6 +24,9 @@ module.exports = {
         collection:'Comment',
         via:'post'
     },
+    owner:{
+        model:'User'
+    },
 
     bodySize:function(){
         return this.body.length;

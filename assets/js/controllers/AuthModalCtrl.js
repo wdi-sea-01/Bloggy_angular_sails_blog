@@ -1,4 +1,4 @@
-myBlogApp.controller('AuthModalCtrl',['$scope','$modalInstance','UserService',function($scope,$modalInstance,UserService){
+myBlogApp.controller('AuthModalCtrl',['$scope','$http','$modalInstance','UserService','AlertService',function($scope,$http,$modalInstance,UserService,AlertService){
 
     $scope.login = function(){
         UserService.login($scope.email,$scope.password,
@@ -16,5 +16,32 @@ myBlogApp.controller('AuthModalCtrl',['$scope','$modalInstance','UserService',fu
             }
         );
     };
+
+    $scope.signup = function(){
+
+        if($scope.signupPassword != $scope.signupPasswordConfirm){
+            alert('your password confirmation does not match');
+            return;
+        }
+
+        var signupData={
+            email:$scope.signupEmail,
+            password:$scope.signupPassword,
+            firstName:$scope.signupFirstName,
+            lastName:$scope.signupLastName
+        };
+
+        console.log(signupData);
+
+        $http.post('/api/user',signupData)
+        .success(function(data){
+            AlertService.add('success','You have been signed up.');
+            $modalInstance.close();
+        })
+        .error(function(err){
+            console.log(err);
+            alert(err);
+        })
+    }
 
 }]);
