@@ -18,6 +18,7 @@ module.exports = {
             url: process.env.MONGOLAB_URI
         }
     },
+    
     models:{
         connection: 'myMongoDbServerProd'      
     }
